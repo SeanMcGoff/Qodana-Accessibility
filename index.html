@@ -7,23 +7,25 @@
     <title>Accessible Form</title>
 </head>
 <body class="bg-slate-50">
-    <div class="w-full h-full flex justify-center items-center">
+    <div class="w-full h-full flex flex-col justify-center items-center">
+        <div class="w-full flex justify-center m-10">
+            <h1 class="font-bold text-xl">A Very Accessible Registration Form</h1>
+        </div>
+        
         <div 
-        class="lg:w-1/3 md:w-1/2 sm:w-2/3 h-auto p-8 border-8 border-opacity-0 rounded-md bg-slate-200 flex flex-col items-center space-y-4" 
+        role="region"
+        class="lg:w-1/3 md:w-1/2 sm:w-full h-auto p-8 border-8 border-opacity-0 rounded-md bg-slate-200 flex flex-col items-center space-y-4" 
         id="registration-block"
-        aria-label="Registration">
-            <div class="w-full text-center">
-                <b>A Very Accessible Registration Form</b>
-            </div> 
+        aria-label="Registration Form">
             <form 
             action="/Qodana-Accessibility/success.html"
             aria-label="registration-form" 
-            class="lg:w-1/2 md:w-2/3 sm:w-5/6 flex flex-col space-y-1"
+            class="lg:w-1/2 md:w-2/3 sm:w-full flex flex-col space-y-1"
             id="registration-form">
                 <!--Email Input-->
                 <label for="registration-form-email">Email</label>
-                <input
-                class="py-1 rounded-md border border-slate-900"
+                <input  
+                class="py-1 rounded-md border-2 border-slate-900 focus:ring-4 focus:ring-blue-500"
                 id="registration-form-email" 
                 type="email" 
                 autocomplete="email"
@@ -33,7 +35,7 @@
                 <!--Username Input-->
                 <label for="registration-form-username">Username</label>
                 <input 
-                class="py-1 rounded-md border border-slate-900 w-full"
+                class="py-1 rounded-md border-2 border-slate-900 focus:ring-4 focus:ring-blue-500"
                 id="registration-form-username" 
                 type="text" 
                 autocomplete="username"
@@ -43,7 +45,7 @@
                 <!--Password Input-->
                 <label for="registration-form-password">Password</label>
                 <input
-                class="py-1 rounded-md border border-slate-900" 
+                class="py-1 rounded-md border-2 border-slate-900 focus:ring-4 focus:ring-blue-500" 
                 id="registration-form-password" 
                 type="password" 
                 autocomplete="new-password"
@@ -53,10 +55,18 @@
                 required pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
                 <div>
                     <label for="registration-form-password-show">Show Password?</label>
-                    <input type="checkbox" id="registration-form-password-show" aria-label="Show Password" onclick="toggleShowPassword()">
+                    <input 
+                    type="checkbox" 
+                    id="registration-form-password-show" 
+                    class="border-2 border-slate-900 focus:ring-2 focus:ring-blue-500"
+                    aria-label="Show Password" 
+                    onclick="toggleShowPassword()">
                 </div>
-                <div class="sr-only" id="registration-form-password-requirements">
-                    <ul class="list-disc">
+                <div 
+                class="sr-only" 
+                id="registration-form-password-requirements"
+                aria-live=”polite”>
+                    <ul class="list-disc text-red-700">
                         <li id="password-requirement-chars">Password must be 8 characters long</li>
                         <li id="password-requirement-uppercase">Password must contain at least 1 uppercase letter</li>
                         <li id="password-requirement-number">Password must contain at least 1 number</li>
@@ -66,10 +76,10 @@
                 <!--Register Button-->
                 <input 
                 type="submit"
-                class="rounded-md border border-gray-800 bg-slate-300 hover:bg-slate-400"
+                class="rounded-md border border-gray-800 bg-slate-300 hover:bg-slate-400 focus:ring-4 focus:ring-blue-500"
                 id="registration-form-submit" 
                 value="Register" 
-                aria-label="Register">
+                aria-label="Submit Registration Form">
             </form>
         </div>
     </div>
@@ -93,15 +103,15 @@
         return /[0-9]/.test(s)
     }
     
-    passwordInput.addEventListener('input', function(e) {
+    passwordInput.addEventListener('change', function(e) {
         // Show Password Requirements to not just screen-readers
         if(passwordInput.value != "") {
             passwordRequirements.classList.remove('sr-only');
         }
         // Remove requirements from non-sr user view when met
-        prChars.className = (passwordInput.value.length >= 8) ? "sr-only" : "";
-        prUpper.className = (containsUppercase(passwordInput.value)) ? "sr-only" : "";
-        prNumber.className = (containsNumber(passwordInput.value)) ? "sr-only" : "";
+        prChars.className = (passwordInput.value.length >= 8) ? "hidden" : "";
+        prUpper.className = (containsUppercase(passwordInput.value)) ? "hidden" : "";
+        prNumber.className = (containsNumber(passwordInput.value)) ? "hidden" : "";
     })
     
 </script>

@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style/index.css" rel="stylesheet">
     <title>Accessible Password Form</title>
 </head>
-<body>
-    
+<body class="bg-slate-50">
+    <div class="w-full h-full flex justify-center items-center">
+        <div class="w-1/3 h-auto p-8 border-8 border-opacity-0 rounded-md bg-slate-200 flex flex-col items-center space-y-4" id="registration-block">
+            <div class="w-full text-center">
+                <b>A Very Accessible Registration Form</b>
+            </div> 
+            <form aria-label="registration-form" class="w-1/2 flex flex-col space-y-1">
+                <!--Email Input-->
+                <label for="registration-form-email">Email</label>
+                <input
+                class="py-1 rounded-md border border-slate-900"
+                id="registration-form-email" 
+                type="email" 
+                autocomplete="email"
+                aria-label="Email" 
+                aria-required="true">
+                <!--Username Input-->
+                <label for="registration-form-username">Username</label>
+                <input 
+                class="py-1 rounded-md border border-slate-900"
+                id="registration-form-username" 
+                type="text" 
+                autocomplete="username"
+                aria-label="Username" 
+                aria-required="true">
+                <!--Password Input-->
+                <label for="registration-form-password">Password</label>
+                <input
+                class="py-1 rounded-md border border-slate-900" 
+                id="registration-form-password" 
+                type="password" 
+                autocomplete="new-password"
+                aria-label="Password" 
+                aria-required="true">
+                <div>
+                    <label for="registration-form-password-show">Show Password?</label>
+                    <input type="checkbox" id="registration-form-password-show" aria-label="Show Password" onclick="toggleShowPassword()">
+                </div>
+                <br>
+                <!--Register Button-->
+                <input 
+                type="submit"
+                class="rounded-md border border-gray-800 bg-slate-300 hover:bg-slate-400"
+                id="registration-form-submit" 
+                value="Register" 
+                aria-label="Register">
+            </form>
+        </div>
+    </div>
 </body>
+<script>
+    function toggleShowPassword() {
+        rfp = document.getElementById("registration-form-password");
+        rfp.setAttribute("type",(rfp.type === "password") ? "text" : "password");
+    }
+</script>
 </html>

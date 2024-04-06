@@ -1,0 +1,14 @@
+{
+  "name": "qodana-accesibility",
+  "version": "1.0.0",
+  "description": "Accessible Form for internship application at Jetbrains",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx tailwindcss -i ./tw.css -o ./style/index.css --watch"
+  },
+  "author": "Sean McGoff",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}

@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./style/index.css" rel="stylesheet">
-    <title>Accessible Password Form</title>
+    <title>Accessible Form</title>
 </head>
 <body class="bg-slate-50">
     <div class="w-full h-full flex justify-center items-center">
-        <div class="lg:w-1/3 md:w-1/2 sm:w-2/3 h-auto p-8 border-8 border-opacity-0 rounded-md bg-slate-200 flex flex-col items-center space-y-4" id="registration-block">
+        <div 
+        class="lg:w-1/3 md:w-1/2 sm:w-2/3 h-auto p-8 border-8 border-opacity-0 rounded-md bg-slate-200 flex flex-col items-center space-y-4" 
+        id="registration-block"
+        aria-label="Registration">
             <div class="w-full text-center">
                 <b>A Very Accessible Registration Form</b>
             </div> 
-            <form aria-label="registration-form" class="lg:w-1/2 md:w-2/3 sm:w-5/6 flex flex-col space-y-1">
+            <form 
+            action="/success.html"
+            aria-label="registration-form" 
+            class="lg:w-1/2 md:w-2/3 sm:w-5/6 flex flex-col space-y-1"
+            id="registration-form">
                 <!--Email Input-->
                 <label for="registration-form-email">Email</label>
                 <input
@@ -21,7 +28,8 @@
                 type="email" 
                 autocomplete="email"
                 aria-label="Email" 
-                aria-required="true">
+                aria-required="true"
+                required>
                 <!--Username Input-->
                 <label for="registration-form-username">Username</label>
                 <input 
@@ -30,7 +38,8 @@
                 type="text" 
                 autocomplete="username"
                 aria-label="Username" 
-                aria-required="true">
+                aria-required="true"
+                required>
                 <!--Password Input-->
                 <label for="registration-form-password">Password</label>
                 <input
@@ -38,11 +47,20 @@
                 id="registration-form-password" 
                 type="password" 
                 autocomplete="new-password"
+                aria-describedby="registration-form-password-requirements"
                 aria-label="Password" 
-                aria-required="true">
+                aria-required="true"
+                required pattern="^(?=.*[A-Z])(?=.*\d).{8,}$">
                 <div>
                     <label for="registration-form-password-show">Show Password?</label>
                     <input type="checkbox" id="registration-form-password-show" aria-label="Show Password" onclick="toggleShowPassword()">
+                </div>
+                <div class="sr-only" id="registration-form-password-requirements">
+                    <ul class="list-disc">
+                        <li id="password-requirement-chars">Password must be 8 characters long</li>
+                        <li id="password-requirement-uppercase">Password must contain at least 1 uppercase letter</li>
+                        <li id="password-requirement-number">Password must contain at least 1 number</li>
+                    </ul>
                 </div>
                 <br>
                 <!--Register Button-->
@@ -57,9 +75,34 @@
     </div>
 </body>
 <script>
+    const rf = document.querySelector("#registration-form");
+    const passwordInput = document.querySelector("#registration-form-password");
+    // Toggles Password Form from being type=text to type=password
     function toggleShowPassword() {
-        rfp = document.getElementById("registration-form-password");
-        rfp.setAttribute("type",(rfp.type === "password") ? "text" : "password");
+        passwordInput.setAttribute("type",(passwordInput.type === "password") ? "text" : "password");
     }
+    // Password Rules Toggle
+    const passwordRequirements = document.querySelector("#registration-form-password-requirements");
+    const prChars = document.querySelector("#password-requirement-chars")
+    const prUpper = document.querySelector("#password-requirement-uppercase")
+    const prNumber = document.querySelector("#password-requirement-number")
+    function containsUppercase(s) {
+        return /[A-Z]/.test(s);
+    }
+    function containsNumber(s) {
+        return /[0-9]/.test(s)
+    }
+    
+    passwordInput.addEventListener('input', function(e) {
+        // Show Password Requirements to not just screen-readers
+        if(passwordInput.value != "") {
+            passwordRequirements.classList.remove('sr-only');
+        }
+        // Remove requirements from non-sr user view when met
+        prChars.className = (passwordInput.value.length >= 8) ? "sr-only" : "";
+        prUpper.className = (containsUppercase(passwordInput.value)) ? "sr-only" : "";
+        prNumber.className = (containsNumber(passwordInput.value)) ? "sr-only" : "";
+    })
+    
 </script>
 </html>

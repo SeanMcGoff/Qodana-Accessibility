@@ -1,6 +1,6 @@
 # Qodana Accessible Form
 
-The goal of this project was to create a registration form that was compliant with [WCAG-2](https://www.w3.org/WAI/standards-guidelines/wcag/). In order to focus more on the accessibility rather than the tech stack, I'm only using HTML5, vanilla JS, Tailwind CSS, and Github Pages to host this. Here are some of the ways that I have made this form is accessible:
+The goal of this project was to create a registration form that was compliant with [WCAG-2](https://www.w3.org/WAI/standards-guidelines/wcag/). In order to focus more on the accessibility rather than the tech stack, I'm only using HTML5, vanilla JS, Tailwind CSS, and Github Pages to host this. Here are some of the ways that I have made this form accessible:
 
 - High Contrast 
   - The minimum contrast of any background/text is 8.19:1, which is over the WCAG's AAA metric of 7:1

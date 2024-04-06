@@ -18,4 +18,4 @@ The goal of this project was to create a registration form that was compliant wi
   - On the initial loading of the page, the rules of the password form are not visible. As one types a password, they appear when the requirements are not met. This can pose a problem for screen readers as someone who is vision-impaired might not be able to see the password requirements. This is solved in multiple ways:
     - Using the *aria-describedby* attribute, a screen reader will read aloud the password requirements on selection of the password input box.
     - While the requirements appear hidden on initial load, I am taking advantage of tailwind's *sr-only* class which hides elements from the user but not screen readers
-    - As password requirements are met, I am then adding the hidden tag to those elements so that on a rejection of password, a user will know exactly which password requirements they haven't met. 
+    - As password requirements are met, I am then adding the hidden class name to those elements so that on a rejection of password, a user will know exactly which password requirements they haven't met. 
